@@ -132,6 +132,8 @@ public class CsmConfig
         public static boolean enableDyedSoldierRecipe = true;
         @Value(comment = "Allow recipe registration of glass clay soldiers.")
         public static boolean enableDyedGlassSoldierRecipe = true;
+        @Value(comment = "Allow recipe registration of wooden clay soldiers.")
+        public static boolean enableWoodSoldierRecipe = true;
         @Value(comment = "Allow recipe registration of resource clay soldiers. (Melon, Coal, Redstone, etc.)")
         public static boolean enableResourceSoldierRecipe = true;
         @Value(comment = "Allow recipe registration of washing clay soldiers. (Bucket of water + teamed soldier doll -> clay soldier doll)")

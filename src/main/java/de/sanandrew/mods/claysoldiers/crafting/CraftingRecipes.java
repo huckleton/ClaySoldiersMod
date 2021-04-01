@@ -27,6 +27,7 @@ public class CraftingRecipes
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         List<IRecipe> recipeList = new ArrayList<>();
         if( CsmConfig.Recipes.enableDyedSoldierRecipe ) recipeList.add(new DyedSoldierRecipe().setRegistryName(new ResourceLocation(CsmConstants.ID, "dyedSoldier")));
+        if( CsmConfig.Recipes.enableWoodSoldierRecipe ) recipeList.add(new WoodSoldierRecipe().setRegistryName(new ResourceLocation(CsmConstants.ID, "woodSoldier")));
         if( CsmConfig.Recipes.enableSoldierWashRecipe ) recipeList.add(new ClearSoldierRecipe().setRegistryName(new ResourceLocation(CsmConstants.ID, "clearSoldier")));
         if( CsmConfig.Recipes.enableResourceSoldierRecipe ) recipeList.add(new OtherSoldierRecipe().setRegistryName(new ResourceLocation(CsmConstants.ID, "othrSoldier")));
         if( CsmConfig.Recipes.enableBrickSoldierReverseRecipe ) recipeList.add(new BrickSoldierConvRecipe().setRegistryName(new ResourceLocation(CsmConstants.ID, "brickSoldierConv")));

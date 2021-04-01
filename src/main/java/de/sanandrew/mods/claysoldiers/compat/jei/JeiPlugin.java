@@ -49,6 +49,10 @@ public class JeiPlugin
             registry.handleRecipes(JeiDyedGlassSoldierRecipe.class, new DyedGlassSoldierRecipeWrapper.Factory(), VanillaRecipeCategoryUid.CRAFTING);
             registry.addRecipes(JeiDyedGlassSoldierRecipe.getRecipes(), VanillaRecipeCategoryUid.CRAFTING);
         }
+        if( CsmConfig.Recipes.enableWoodSoldierRecipe ) {
+            registry.handleRecipes(JeiWoodSoldierRecipe.class, new WoodSoldierRecipeWrapper.Factory(), VanillaRecipeCategoryUid.CRAFTING);
+            registry.addRecipes(JeiWoodSoldierRecipe.getRecipes(), VanillaRecipeCategoryUid.CRAFTING);
+        }
     }
 
     @Override
