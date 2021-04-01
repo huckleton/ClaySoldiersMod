@@ -35,6 +35,7 @@ import javax.annotation.Nonnull;
 import de.sanandrew.mods.claysoldiers.api.entity.soldier.upgrade.UpgradeFunctions;
 
 import java.util.Objects;
+import org.apache.logging.log4j.Level;
 
 @UpgradeFunctions({EnumUpgFunctions.ON_DAMAGED, EnumUpgFunctions.ON_DEATH})
 public class UpgradeFood

@@ -10,8 +10,6 @@ import de.sanandrew.mods.claysoldiers.api.doll.IDollType;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.UUID;
-
 public interface ITeam
         extends IDollType
 {
@@ -19,7 +17,7 @@ public interface ITeam
      * gets the unique ID for that team.
      * @return the team ID
      */
-    UUID getId();
+    String getId();
 
     /**
      * gets the unique name for that team.

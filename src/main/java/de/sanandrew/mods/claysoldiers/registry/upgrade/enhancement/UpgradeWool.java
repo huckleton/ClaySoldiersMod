@@ -17,7 +17,6 @@ import de.sanandrew.mods.claysoldiers.api.entity.soldier.upgrade.UpgradeFunction
 import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeRegistry;
 import de.sanandrew.mods.claysoldiers.registry.upgrade.Upgrades;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -29,7 +28,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.mutable.MutableFloat;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
 
 @UpgradeFunctions({EnumUpgFunctions.ON_OTHR_DESTROYED, EnumUpgFunctions.ON_DAMAGED})
 public class UpgradeWool
@@ -104,8 +102,8 @@ public class UpgradeWool
 
     @Override
     public void onUpgradeDestroyed(ISoldier soldier, ISoldierUpgradeInst upgradeInst, ISoldierUpgradeInst destroyedUpgInst) {
-        UUID dUpgId = UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade());
-        if( !soldier.getEntity().world.isRemote && (UuidUtils.areUuidsEqual(dUpgId, Upgrades.MC_LEATHER) || UuidUtils.areUuidsEqual(dUpgId, Upgrades.MC_RABBITHIDE)) ) {
+        String dUpgId = UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade());
+        if( !soldier.getEntity().world.isRemote && (dUpgId == Upgrades.MC_LEATHER || dUpgId == Upgrades.MC_RABBITHIDE) ) {
             soldier.destroyUpgrade(this, this.getType(soldier), true);
         }
     }

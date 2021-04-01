@@ -13,7 +13,6 @@ import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeRegistry;
 import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeEntry;
 import de.sanandrew.mods.sanlib.lib.network.AbstractMessage;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +22,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class PacketSyncUpgrades
         extends AbstractMessage<PacketSyncUpgrades>
@@ -81,8 +79,8 @@ public class PacketSyncUpgrades
         this.upgrades = new UpgradeEntry[buf.readInt()];
         for( int i = 0; i < this.upgrades.length; i++ ) {
             String idStr = ByteBufUtils.readUTF8String(buf);
-            if( UuidUtils.isStringUuid(idStr) ) {
-                this.upgrades[i] = new UpgradeEntry(UpgradeRegistry.INSTANCE.getUpgrade(UUID.fromString(idStr)), EnumUpgradeType.VALUES[buf.readByte()]);
+            if( idStr instanceof String  ) {
+                this.upgrades[i] = new UpgradeEntry(UpgradeRegistry.INSTANCE.getUpgrade(idStr), EnumUpgradeType.VALUES[buf.readByte()]);
                 if( this.add && this.upgrades[i].upgrade.syncNbtData() ) {
                     NBTTagCompound newNbt = new NBTTagCompound();
                     this.upgrades[i].upgrade.readSyncData(buf, newNbt);
@@ -98,8 +96,8 @@ public class PacketSyncUpgrades
         buf.writeInt(this.soldierId);
         buf.writeInt(this.upgrades.length);
         for( UpgradeEntry upg :upgrades ) {
-            UUID id = UpgradeRegistry.INSTANCE.getId(upg.upgrade);
-            ByteBufUtils.writeUTF8String(buf, MiscUtils.defIfNull(id, UuidUtils.EMPTY_UUID).toString());
+            String id = UpgradeRegistry.INSTANCE.getId(upg.upgrade);
+            ByteBufUtils.writeUTF8String(buf, MiscUtils.defIfNull(id, ""));
             buf.writeByte(upg.type.ordinal());
             if( this.add && this.upgradeNBT.containsKey(upg) ) {
                 upg.upgrade.writeSyncData(buf, this.upgradeNBT.get(upg));

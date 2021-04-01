@@ -12,7 +12,6 @@ import de.sanandrew.mods.claysoldiers.entity.soldier.EntityClaySoldier;
 import de.sanandrew.mods.claysoldiers.registry.effect.EffectRegistry;
 import de.sanandrew.mods.sanlib.lib.network.AbstractMessage;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class PacketSyncEffects
         extends AbstractMessage<PacketSyncEffects>
@@ -85,8 +83,8 @@ public class PacketSyncEffects
 
         for( int i = 0, max = this.effects.length; i < max; i++ ) {
             String idStr = ByteBufUtils.readUTF8String(buf);
-            if( UuidUtils.isStringUuid(idStr) ) {
-                this.effects[i] = EffectRegistry.INSTANCE.getEffect(UUID.fromString(idStr));
+            if( idStr instanceof String ) {
+                this.effects[i] = EffectRegistry.INSTANCE.getEffect(idStr);
                 this.durations[i] = buf.readInt();
 
                 if( this.add && this.effects[i].syncNbtData() ) {
@@ -107,9 +105,9 @@ public class PacketSyncEffects
         for( int i = 0, max = this.effects.length; i < max; i++ ) {
             ISoldierEffect eff = this.effects[i];
             int duration = this.durations[i];
-            UUID id = EffectRegistry.INSTANCE.getId(eff);
+            String id = EffectRegistry.INSTANCE.getId(eff);
 
-            ByteBufUtils.writeUTF8String(buf, MiscUtils.defIfNull(id, UuidUtils.EMPTY_UUID).toString());
+            ByteBufUtils.writeUTF8String(buf, MiscUtils.defIfNull(id, ""));
             buf.writeInt(duration);
 
             if( this.add && this.effectNBT.containsKey(eff) ) {

@@ -4,18 +4,17 @@ import de.sanandrew.mods.claysoldiers.api.entity.soldier.effect.ISoldierEffect;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 @SuppressWarnings("UnusedReturnValue")
 public interface IEffectRegistry
 {
-    boolean registerEffect(UUID id, ISoldierEffect effect);
+    boolean registerEffect(String id, ISoldierEffect effect);
 
     @Nullable
-    ISoldierEffect getEffect(UUID id);
+    ISoldierEffect getEffect(String id);
 
     @Nullable
-    UUID getId(ISoldierEffect effect);
+    String getId(ISoldierEffect effect);
 
     List<ISoldierEffect> getEffects();
 }

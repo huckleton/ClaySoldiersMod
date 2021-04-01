@@ -15,7 +15,6 @@ import de.sanandrew.mods.claysoldiers.registry.team.TeamRegistry;
 import de.sanandrew.mods.claysoldiers.registry.team.Teams;
 import de.sanandrew.mods.claysoldiers.util.CsmConfig;
 import de.sanandrew.mods.claysoldiers.util.CsmCreativeTabs;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,7 +44,7 @@ public class ItemSoldier
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if( CsmConfig.Recipes.enableCauldronSoldierWash && !world.isRemote && player.canPlayerEdit(pos.offset(facing), facing, stack) && world.getBlockState(pos).getBlock() == Blocks.CAULDRON && hand != null ) {
-            if( !player.isSneaking() && !UuidUtils.areUuidsEqual(TeamRegistry.INSTANCE.getTeam(stack).getId(), Teams.SOLDIER_CLAY) ) {
+            if( !player.isSneaking() && TeamRegistry.INSTANCE.getTeam(stack).getId() != Teams.SOLDIER_CLAY) {
                 IBlockState state = world.getBlockState(pos);
                 int level = state.getValue(BlockCauldron.LEVEL);
                 if( level > 0 ) {

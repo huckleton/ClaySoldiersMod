@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.UUID;
 
 public interface ITeamRegistry
 {
@@ -26,7 +25,7 @@ public interface ITeamRegistry
      * @param uniqueTextures the unique textures for the soldier entities, can be null if no unique textures should be used
      * @return a standard {@link ITeam} implementation if registration succeeded, null otherwise
      */
-    ITeam registerTeam(UUID id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqueTextures);
+    ITeam registerTeam(String id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqueTextures);
 
     /**
      * registers a team with a custom implementation.
@@ -41,7 +40,7 @@ public interface ITeamRegistry
      * @return an instance of the associated team, null if no team can be found
      */
     @Nonnull
-    ITeam getTeam(UUID id);
+    ITeam getTeam(String id);
 
     /**
      * gets a list of all registered teams, sorted by the order of registration
@@ -80,7 +79,7 @@ public interface ITeamRegistry
      * @param team the team ID
      * @return A new ItemStack holding the soldier doll item with the given team
      */
-    ItemStack getNewTeamStack(int count, UUID team);
+    ItemStack getNewTeamStack(int count, String team);
 
     /**
      * applies the team to the ItemStack
@@ -88,7 +87,7 @@ public interface ITeamRegistry
      * @param team the team ID the ItemStack should save
      * @return the ItemStack with the team
      */
-    default ItemStack setTeam(ItemStack stack, UUID team) { return this.setTeam(stack, this.getTeam(team)); }
+    default ItemStack setTeam(ItemStack stack, String team) { return this.setTeam(stack, this.getTeam(team)); }
 
     /**
      * registers a team with a standard implementation without unique textures, which is returned if the registration succeeded.
@@ -100,7 +99,7 @@ public interface ITeamRegistry
      * @param rareTextures the rare textures for the soldier entities, can be null if no rare textures should be used
      * @return a standard {@link ITeam} implementation if registration succeeded, null otherwise
      */
-    default ITeam registerTeam(UUID id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures) {
+    default ITeam registerTeam(String id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures) {
         return this.registerTeam(id, name, itemModel, itemColor, normalTextures, rareTextures, null);
     }
 
@@ -113,7 +112,7 @@ public interface ITeamRegistry
      * @param normalTextures the standard textures for the soldier entities, there must be at least one texture defined
      * @return a standard {@link ITeam} implementation if registration succeeded, null otherwise
      */
-    default ITeam registerTeam(UUID id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures) {
+    default ITeam registerTeam(String id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures) {
         return this.registerTeam(id, name, itemModel, itemColor, normalTextures, null, null);
     }
 }

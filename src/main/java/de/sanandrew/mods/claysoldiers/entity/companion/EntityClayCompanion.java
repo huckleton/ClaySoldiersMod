@@ -18,11 +18,9 @@ import de.sanandrew.mods.claysoldiers.entity.ai.EntityAIFollowEnemy;
 import de.sanandrew.mods.claysoldiers.entity.ai.EntityAIMoveAwayFromCorners;
 import de.sanandrew.mods.claysoldiers.entity.ai.EntityAISearchTarget;
 import de.sanandrew.mods.claysoldiers.entity.ai.PathHelper;
-import de.sanandrew.mods.claysoldiers.network.datasync.DataSerializerUUID;
 import de.sanandrew.mods.claysoldiers.registry.team.TeamRegistry;
 import de.sanandrew.mods.claysoldiers.util.CsmConfig;
 import de.sanandrew.mods.sanlib.lib.util.ItemStackUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,13 +37,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
+import net.minecraft.network.datasync.DataSerializers;
 
 public abstract class EntityClayCompanion<E extends EntityCreature, T extends IDollType>
         extends EntityCreature
         implements ICompanion<E>, IEntityAdditionalSpawnData, ITargetingEntity<E>
 {
-    private static final DataParameter<UUID> OCCUPATION_PARAM = EntityDataManager.createKey(EntityClayCompanion.class, DataSerializerUUID.INSTANCE);
+    private static final DataParameter<String> OCCUPATION_PARAM = EntityDataManager.createKey(EntityClayCompanion.class, DataSerializers.STRING);
 
     private final PathHelper pathHelper;
     T type = this.getUnknownType();
@@ -56,7 +54,7 @@ public abstract class EntityClayCompanion<E extends EntityCreature, T extends ID
     public EntityClayCompanion(World worldIn) {
         super(worldIn);
 
-        this.dataManager.register(OCCUPATION_PARAM, TeamRegistry.NULL_TEAM.getId());
+        this.dataManager.register(OCCUPATION_PARAM, "");
 
         this.stepHeight = 0.1F;
         this.jumpMovementFactor = 0.2F;
@@ -111,7 +109,7 @@ public abstract class EntityClayCompanion<E extends EntityCreature, T extends ID
         super.readEntityFromNBT(compound);
 
         String teamId = compound.getString(NBTConstants.E_COMPANION_TEAM);
-        this.dataManager.set(OCCUPATION_PARAM, UuidUtils.isStringUuid(teamId) ? UUID.fromString(teamId) : UuidUtils.EMPTY_UUID);
+        this.dataManager.set(OCCUPATION_PARAM, teamId instanceof String ? teamId : "");
         this.textureId = compound.getInteger(NBTConstants.E_TEXTURE_ID);
         this.doll = new ItemStack(compound.getCompoundTag(NBTConstants.E_DOLL_ITEM));
     }

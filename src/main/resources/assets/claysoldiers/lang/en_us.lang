@@ -90,6 +90,19 @@ item.claysoldiers:doll_soldier.potato.color=Potato
 item.claysoldiers:doll_soldier.beetroot.name=Beetroot Soldier
 item.claysoldiers:doll_soldier.beetroot.color=Beetroot
 
+item.claysoldiers:doll_soldier.oakwood.name=Oak Wood Soldier
+item.claysoldiers:doll_soldier.oakwood.color=Oak Wood
+item.claysoldiers:doll_soldier.birchwood.name=Birch Wood Soldier
+item.claysoldiers:doll_soldier.birchwood.color=Birch Wood
+item.claysoldiers:doll_soldier.sprucewood.name=Spruce Wood Soldier
+item.claysoldiers:doll_soldier.sprucewood.color=Spruce Wood
+item.claysoldiers:doll_soldier.junglewood.name=Jungle Wood Soldier
+item.claysoldiers:doll_soldier.junglewood.color=Jungle Wood
+item.claysoldiers:doll_soldier.acaciawood.name=Acacia Wood Soldier
+item.claysoldiers:doll_soldier.acaciawood.color=Acacia Wood
+item.claysoldiers:doll_soldier.darkoakwood.name=Dark Oak Wood Soldier
+item.claysoldiers:doll_soldier.darkoakwood.color=Dark Oak Wood
+
 item.claysoldiers:doll_brick_soldier.name=Brick Soldier Doll
 
 item.claysoldiers:doll_horse.dirt.name=Dirt Horse

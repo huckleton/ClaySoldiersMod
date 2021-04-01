@@ -14,14 +14,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 class JeiOtherSoldierRecipe
 {
     final ItemStack result;
     final List<List<ItemStack>> ingredients;
 
-    JeiOtherSoldierRecipe(ItemStack item, UUID team) {
+    JeiOtherSoldierRecipe(ItemStack item, String team) {
         this.result = TeamRegistry.INSTANCE.getNewTeamStack(4, team);
         this.ingredients = new ArrayList<>();
 
@@ -46,7 +45,7 @@ class JeiOtherSoldierRecipe
 
         for( int i = 0; i < OtherSoldierRecipe.TEAMS.length; i++ ) {
             ItemStack item = OtherSoldierRecipe.ITEMS[i];
-            UUID team = OtherSoldierRecipe.TEAMS[i];
+            String team = OtherSoldierRecipe.TEAMS[i];
             recipes.add(new JeiOtherSoldierRecipe(item, team));
         }
 

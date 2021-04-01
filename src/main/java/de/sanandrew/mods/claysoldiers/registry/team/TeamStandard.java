@@ -16,13 +16,12 @@ import org.apache.logging.log4j.Level;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class TeamStandard
         implements ITeam
 {
-    private final UUID id;
+    private final String id;
     private final String name;
     private final ResourceLocation itmModel;
     private final int itmColor;
@@ -33,7 +32,7 @@ public class TeamStandard
     private final Map<Integer, ResourceLocation> uniqTextures;
     private int[] uniqTextureIds;
 
-    public TeamStandard(UUID id, String name, ResourceLocation itmModel, int itmColor, ResourceLocation[] nrmlTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqTextures) {
+    public TeamStandard(String id, String name, ResourceLocation itmModel, int itmColor, ResourceLocation[] nrmlTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqTextures) {
         this.id = id;
         this.name = name;
         this.itmModel = itmModel;
@@ -66,7 +65,7 @@ public class TeamStandard
     }
 
     @Override
-    public UUID getId() {
+    public String getId() {
         return this.id;
     }
 

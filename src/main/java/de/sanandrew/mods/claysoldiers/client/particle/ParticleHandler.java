@@ -32,7 +32,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.EnumMap;
-import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
@@ -67,8 +66,8 @@ public final class ParticleHandler
         IDollType type = null;
         ItemDoll<?, IDollType> doll = null;
         switch( particle ) {
-            case TEAM_BREAK: if( additData.checkValue(0, val -> val instanceof UUID) ) {
-                type = TeamRegistry.INSTANCE.getTeam(additData.<UUID>getValue(0));
+            case TEAM_BREAK: if( additData.checkValue(0, val -> val instanceof String) ) {
+                type = TeamRegistry.INSTANCE.getTeam(additData.<String>getValue(0));
                 doll = ReflectionUtils.getCasted(ItemRegistry.DOLL_SOLDIER);
             } break;
             case HORSE_BREAK: if( additData.checkValue(0, val -> val instanceof Integer) ) {

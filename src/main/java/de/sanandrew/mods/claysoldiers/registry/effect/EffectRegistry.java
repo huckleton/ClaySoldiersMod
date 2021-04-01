@@ -17,15 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public final class EffectRegistry
         implements IEffectRegistry
 {
     public static final EffectRegistry INSTANCE = new EffectRegistry();
     private final List<ISoldierEffect> effects;
-    private final Map<UUID, ISoldierEffect> idToEffectMap;
-    private final Map<ISoldierEffect, UUID> effectToIdMap;
+    private final Map<String, ISoldierEffect> idToEffectMap;
+    private final Map<ISoldierEffect, String> effectToIdMap;
 
     private EffectRegistry() {
         this.effects = new ArrayList<>();
@@ -34,7 +33,7 @@ public final class EffectRegistry
     }
 
     @Override
-    public boolean registerEffect(UUID id, ISoldierEffect effect) {
+    public boolean registerEffect(String id, ISoldierEffect effect) {
         if( id == null || effect == null ) {
             CsmConstants.LOG.log(Level.WARN, String.format("Effect ID and instance cannot be null nor empty for ID %s!", id));
             return false;
@@ -60,13 +59,13 @@ public final class EffectRegistry
 
     @Nullable
     @Override
-    public ISoldierEffect getEffect(UUID id) {
+    public ISoldierEffect getEffect(String id) {
         return this.idToEffectMap.get(id);
     }
 
     @Nullable
     @Override
-    public UUID getId(ISoldierEffect effect) {
+    public String getId(ISoldierEffect effect) {
         return this.effectToIdMap.get(effect);
     }
 

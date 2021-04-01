@@ -35,7 +35,7 @@ public enum EnumClayHorseType
     SOULSAND(true, 35.0F, 1.15F, false, false, 0x5C3100, "soulsand"),
     CAKE(true, 30.0F, 1.4F, false, false, "cake", 0xFFFFFF, "cake"),
 
-    NIGHTMARE(false, 50.0F, 1.6F, false, true, 0x0, "spec_nightmare1", "spec_nightmare2"),
+    NIGHTMARE(false, 50.0F, 1.6F, false, true, "nightmare", 0x0, "spec_nightmare1", "spec_nightmare2"),
 
     @EnumExclude
     UNKNOWN(false, 0.0F, 0.0F, false, false, 0x0);

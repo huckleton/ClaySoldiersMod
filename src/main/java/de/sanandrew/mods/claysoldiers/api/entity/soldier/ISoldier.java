@@ -20,7 +20,6 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.UUID;
 
 public interface ISoldier<T extends EntityCreature & ISoldier<T>>
         extends IDisruptable, IHandedUpgradeable
@@ -29,15 +28,15 @@ public interface ISoldier<T extends EntityCreature & ISoldier<T>>
 
     ISoldierEffectInst addEffect(ISoldierEffect effect, int duration);
 
-    boolean hasEffect(UUID effectId);
+    boolean hasEffect(String effectId);
 
     boolean hasEffect(ISoldierEffect effect);
 
     int getEffectDurationLeft(ISoldierEffect effect);
 
-    int getEffectDurationLeft(UUID effectId);
+    int getEffectDurationLeft(String effectId);
 
-    ISoldierEffectInst getEffectInstance(UUID effectId);
+    ISoldierEffectInst getEffectInstance(String effectId);
 
     ISoldierEffectInst getEffectInstance(ISoldierEffect entry);
 
@@ -67,7 +66,7 @@ public interface ISoldier<T extends EntityCreature & ISoldier<T>>
 
     ISoldierUpgradeInst addUpgrade(ISoldierUpgrade upgrade, EnumUpgradeType type, @Nonnull ItemStack stack);
 
-    ISoldierUpgradeInst getUpgradeInstance(UUID upgradeId, EnumUpgradeType type);
+    ISoldierUpgradeInst getUpgradeInstance(String upgradeId, EnumUpgradeType type);
 
     boolean canPickupUpgrade(ISoldierUpgrade upgrade, ItemStack stack);
 
@@ -75,7 +74,7 @@ public interface ISoldier<T extends EntityCreature & ISoldier<T>>
 
     ISoldierUpgradeInst getUpgradeInstance(ISoldierUpgrade upgrade, EnumUpgradeType type);
 
-    boolean hasUpgrade(UUID id, EnumUpgradeType type);
+    boolean hasUpgrade(String id, EnumUpgradeType type);
 
     boolean hasUpgrade(ISoldierUpgrade upgrade, EnumUpgradeType type);
 

@@ -19,7 +19,6 @@ import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeRegistry;
 import de.sanandrew.mods.claysoldiers.registry.upgrade.Upgrades;
 import de.sanandrew.mods.sanlib.lib.util.EntityUtils;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -87,7 +86,7 @@ public class UpgradePrismarineShard
     @Override
     public void onUpgradeAdded(ISoldier soldier, ISoldierUpgradeInst upgradeInst, ISoldierUpgradeInst addedUpgInst) {
         if( !soldier.getEntity().world.isRemote ) {
-            if( UuidUtils.areUuidsEqual(UpgradeRegistry.INSTANCE.getId(addedUpgInst.getUpgrade()), Upgrades.MOH_SHEARBLADE) ) {
+            if( UpgradeRegistry.INSTANCE.getId(addedUpgInst.getUpgrade()) == Upgrades.MOH_SHEARBLADE ) {
                 if( addedUpgInst.getUpgradeType() == EnumUpgradeType.MAIN_HAND ) {
                     AttributeHelper.tryApplyAttackDmgModifier(soldier.getEntity(), SHEAR_DMG_M);
                 }
@@ -101,7 +100,7 @@ public class UpgradePrismarineShard
     @Override
     public void onUpgradeDestroyed(ISoldier soldier, ISoldierUpgradeInst upgradeInst, ISoldierUpgradeInst destroyedUpgInst) {
         if( !soldier.getEntity().world.isRemote ) {
-            if( UuidUtils.areUuidsEqual(UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()), Upgrades.MOH_SHEARBLADE) ) {
+            if( UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()) == Upgrades.MOH_SHEARBLADE)  {
                 if( destroyedUpgInst.getUpgradeType() == EnumUpgradeType.MAIN_HAND ) {
                     AttributeHelper.tryRemoveAttackDmgModifier(soldier.getEntity(), SHEAR_DMG_M);
                 }

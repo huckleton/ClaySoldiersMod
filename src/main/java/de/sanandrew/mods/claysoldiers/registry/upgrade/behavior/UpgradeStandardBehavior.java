@@ -85,9 +85,9 @@ public class UpgradeStandardBehavior
         EntityCreature soldierL = soldier.getEntity();
         if( soldierL.world.isRemote && MiscUtils.RNG.randomInt(50) == 0 ) {
             ItemStack stack = upgradeInst.getSavedStack();
-            ClaySoldiersMod.proxy.spawnParticle(EnumParticle.ITEM_BREAK, soldierL.world.provider.getDimension(), soldierL.posX, soldierL.posY + soldierL.getEyeHeight(),
-                                                soldierL.posZ, Item.getIdFromItem(stack.getItem()), stack.getItemDamage(),
-                                                stack.hasTagCompound() ? Objects.requireNonNull(stack.getTagCompound()).toString() : "");
+            /*ClaySoldiersMod.proxy.spawnParticle(EnumParticle.ITEM_BREAK, soldierL.world.provider.getDimension(), soldierL.posX, soldierL.posY + soldierL.getEyeHeight(),
+            soldierL.posZ, Item.getIdFromItem(stack.getItem()), stack.getItemDamage(),
+            stack.hasTagCompound() ? Objects.requireNonNull(stack.getTagCompound()).toString() : "");*/
         }
     }
 }

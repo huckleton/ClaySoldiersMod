@@ -21,7 +21,6 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.util.EnumHand;
 
-import java.util.UUID;
 
 public abstract class EntityAIFollowEnemy
         extends EntityAIFollowTarget<EntityCreature>

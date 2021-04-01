@@ -11,20 +11,19 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public interface IUpgradeRegistry
 {
-    boolean registerUpgrade(UUID id, ISoldierUpgrade upgrade);
+    boolean registerUpgrade(String id, ISoldierUpgrade upgrade);
 
     @Nullable
-    ISoldierUpgrade getUpgrade(UUID id);
+    ISoldierUpgrade getUpgrade(String id);
 
     @Nullable
     ISoldierUpgrade getUpgrade(ItemStack stack);
 
     @Nullable
-    UUID getId(ISoldierUpgrade upgrade);
+    String getId(ISoldierUpgrade upgrade);
 
     List<ISoldierUpgrade> getUpgrades();
 }

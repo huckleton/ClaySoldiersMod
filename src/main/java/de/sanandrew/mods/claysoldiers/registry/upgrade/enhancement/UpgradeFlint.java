@@ -18,7 +18,6 @@ import de.sanandrew.mods.claysoldiers.api.entity.soldier.upgrade.UpgradeFunction
 import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeRegistry;
 import de.sanandrew.mods.claysoldiers.registry.upgrade.Upgrades;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -80,7 +79,7 @@ public class UpgradeFlint
 
     @Override
     public void onUpgradeDestroyed(ISoldier soldier, ISoldierUpgradeInst upgradeInst, ISoldierUpgradeInst destroyedUpgInst) {
-        if( !soldier.getEntity().world.isRemote && UuidUtils.areUuidsEqual(UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()), Upgrades.MH_STICK) ) {
+        if( !soldier.getEntity().world.isRemote && UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()) == Upgrades.MH_STICK)  {
             AttributeHelper.tryRemoveAttackDmgModifier(soldier.getEntity(), SOLDIER_FLINT_DMG);
             soldier.destroyUpgrade(this, this.getType(soldier), true);
         }

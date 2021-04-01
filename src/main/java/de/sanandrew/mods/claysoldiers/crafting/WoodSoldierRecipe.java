@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OtherSoldierRecipe
+public class WoodSoldierRecipe
         extends IForgeRegistryEntry.Impl<IRecipe>
         implements IRecipe
 {
@@ -34,28 +34,20 @@ public class OtherSoldierRecipe
     private ItemStack resultItem = ItemStack.EMPTY;
 
     public static final String[] TEAMS = {
-            Teams.SOLDIER_MELON,
-            Teams.SOLDIER_PUMPKIN,
-            Teams.SOLDIER_PUMPKIN,
-            Teams.SOLDIER_REDSTONE,
-            Teams.SOLDIER_COAL,
-            Teams.SOLDIER_COAL,
-            Teams.SOLDIER_CARROT,
-            Teams.SOLDIER_POTATO,
-            Teams.SOLDIER_POTATO,
-            Teams.SOLDIER_BEETROOT
+            Teams.SOLDIER_WOODOAK,
+            Teams.SOLDIER_WOODSPRUCE,
+            Teams.SOLDIER_WOODBIRCH,
+            Teams.SOLDIER_WOODJUNGLE,
+            Teams.SOLDIER_WOODACACIA,
+            Teams.SOLDIER_WOODDARKOAK
     };
     public static final ItemStack[] ITEMS = {
-            new ItemStack(Blocks.MELON_BLOCK, 1),
-            new ItemStack(Blocks.PUMPKIN, 1),
-            new ItemStack(Blocks.LIT_PUMPKIN, 1),
-            new ItemStack(Items.REDSTONE, 1),
-            new ItemStack(Items.COAL, 1, 0),
-            new ItemStack(Items.COAL, 1, 1),
-            new ItemStack(Items.CARROT, 1),
-            new ItemStack(Items.POTATO, 1),
-            new ItemStack(Items.POISONOUS_POTATO, 1),
-            new ItemStack(Items.BEETROOT)
+            new ItemStack(Blocks.PLANKS, 0),
+            new ItemStack(Blocks.PLANKS, 1),
+            new ItemStack(Blocks.PLANKS, 2),
+            new ItemStack(Blocks.PLANKS, 3),
+            new ItemStack(Blocks.PLANKS, 4),
+            new ItemStack(Blocks.PLANKS, 5)
     };
 
     @Override

@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public final class UpgradeRegistry
         implements IUpgradeRegistry
@@ -31,8 +30,8 @@ public final class UpgradeRegistry
     public static final UpgradeRegistry INSTANCE = new UpgradeRegistry();
 
     private final List<ISoldierUpgrade> upgrades;
-    private final Map<UUID, ISoldierUpgrade> idToUpgradeMap;
-    private final Map<ISoldierUpgrade, UUID> upgradeToIdMap;
+    private final Map<String, ISoldierUpgrade> idToUpgradeMap;
+    private final Map<ISoldierUpgrade, String> upgradeToIdMap;
     private final Map<ItemStack, ISoldierUpgrade> stackToUpgradeMap;
 
     private UpgradeRegistry() {
@@ -43,7 +42,7 @@ public final class UpgradeRegistry
     }
 
     @Override
-    public boolean registerUpgrade(UUID id, ISoldierUpgrade upgrade) {
+    public boolean registerUpgrade(String id, ISoldierUpgrade upgrade) {
         if( id == null || upgrade == null ) {
             CsmConstants.LOG.log(Level.WARN, String.format("Upgrade ID and instance cannot be null nor empty for ID %s!", id));
             return false;
@@ -82,13 +81,13 @@ public final class UpgradeRegistry
 
     @Nullable
     @Override
-    public ISoldierUpgrade getUpgrade(UUID id) {
+    public ISoldierUpgrade getUpgrade(String id) {
         return this.idToUpgradeMap.get(id);
     }
 
     @Nullable
     @Override
-    public UUID getId(ISoldierUpgrade upgrade) {
+    public String getId(ISoldierUpgrade upgrade) {
         return this.upgradeToIdMap.get(upgrade);
     }
 

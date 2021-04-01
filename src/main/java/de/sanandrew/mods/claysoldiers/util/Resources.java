@@ -21,7 +21,8 @@ public enum Resources
     ITEM_SOLDIER_CARROT("soldiers/carrot"),
     ITEM_SOLDIER_POTATO("soldiers/potato"),
     ITEM_SOLDIER_BEETROOT("soldiers/beetroot"),
-
+    ITEM_SOLDIER_WOOD("soldiers/wood"),
+    
     ENTITY_SOLDIER_N_CLAY("textures/entities/soldiers/lightgray.png"),
     ENTITY_SOLDIER_N_RED("textures/entities/soldiers/red.png"),
     ENTITY_SOLDIER_N_YELLOW("textures/entities/soldiers/yellow.png"),
@@ -38,6 +39,14 @@ public enum Resources
     ENTITY_SOLDIER_N_BLACK("textures/entities/soldiers/black.png"),
     ENTITY_SOLDIER_N_GRAY("textures/entities/soldiers/gray.png"),
     ENTITY_SOLDIER_N_WHITE("textures/entities/soldiers/white.png"),
+    
+    ENTITY_SOLDIER_N_WOODOAK("textures/entities/soldiers/oak.png"),
+    ENTITY_SOLDIER_N_WOODBIRCH("textures/entities/soldiers/birch.png"),
+    ENTITY_SOLDIER_N_WOODSPRUCE("textures/entities/soldiers/spruce.png"),
+    ENTITY_SOLDIER_N_WOODJUNGLE("textures/entities/soldiers/jungle.png"),
+    ENTITY_SOLDIER_N_WOODACACIA("textures/entities/soldiers/acacia.png"),
+    ENTITY_SOLDIER_N_WOODDARKOAK("textures/entities/soldiers/darkoak.png"),
+    
     ENTITY_SOLDIER_N_MELON("textures/entities/soldiers/melon.png"),
     ENTITY_SOLDIER_N_PUMPKIN_1("textures/entities/soldiers/pumpkin.png"),
     ENTITY_SOLDIER_N_PUMPKIN_2("textures/entities/soldiers/pumpkin2.png"),
@@ -84,6 +93,14 @@ public enum Resources
     ENTITY_SOLDIER_R_BLACK("textures/entities/soldiers/rare/black.png"),
     ENTITY_SOLDIER_R_GRAY("textures/entities/soldiers/rare/gray.png"),
     ENTITY_SOLDIER_R_WHITE("textures/entities/soldiers/rare/white.png"),
+    
+    ENTITY_SOLDIER_R_WOODOAK("textures/entities/soldiers/rare/oak.png"),
+    ENTITY_SOLDIER_R_WOODBIRCH("textures/entities/soldiers/rare/birch.png"),
+    ENTITY_SOLDIER_R_WOODSPRUCE("textures/entities/soldiers/rare/spruce.png"),
+    ENTITY_SOLDIER_R_WOODJUNGLE("textures/entities/soldiers/rare/jungle.png"),
+    ENTITY_SOLDIER_R_WOODACACIA("textures/entities/soldiers/rare/acacia.png"),
+    ENTITY_SOLDIER_R_WOODDARKOAK("textures/entities/soldiers/rare/darkoak.png"),
+    
     ENTITY_SOLDIER_R_MELON("textures/entities/soldiers/rare/melon.png"),
     ENTITY_SOLDIER_R_PUMPKIN_1("textures/entities/soldiers/rare/pumpkin.png"),
     ENTITY_SOLDIER_R_PUMPKIN_2("textures/entities/soldiers/rare/pumpkin2.png"),

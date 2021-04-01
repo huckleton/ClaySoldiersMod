@@ -21,7 +21,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.UUID;
 
 public class DyedSoldierRecipe
         extends IForgeRegistryEntry.Impl<IRecipe>
@@ -31,7 +30,7 @@ public class DyedSoldierRecipe
     @Nonnull
     private ItemStack resultItem = ItemStack.EMPTY;
 
-    public static final UUID[] TEAMS = {
+    public static final String[] TEAMS = {
             Teams.SOLDIER_BLACK,
             Teams.SOLDIER_RED,
             Teams.SOLDIER_GREEN,

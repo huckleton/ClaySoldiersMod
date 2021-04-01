@@ -14,14 +14,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 class JeiDyedGlassSoldierRecipe
 {
     final ItemStack result;
     final List<List<ItemStack>> ingredients;
 
-    JeiDyedGlassSoldierRecipe(String dyeColor, UUID team, int count) {
+    JeiDyedGlassSoldierRecipe(String dyeColor, String team, int count) {
         this.result = TeamRegistry.INSTANCE.getNewTeamStack(count, team);
         this.ingredients = new ArrayList<>();
 
@@ -44,7 +43,7 @@ class JeiDyedGlassSoldierRecipe
 
         for( int i = 0; i < DyedGlassSoldierRecipe.TEAMS.length; i++ ) {
             String color = DyedGlassSoldierRecipe.COLORS[i];
-            UUID team = DyedGlassSoldierRecipe.TEAMS[i];
+            String team = DyedGlassSoldierRecipe.TEAMS[i];
             for( int j = 1; j <= 8; j++ ) {
                 recipes.add(new JeiDyedGlassSoldierRecipe(color, team, j));
             }

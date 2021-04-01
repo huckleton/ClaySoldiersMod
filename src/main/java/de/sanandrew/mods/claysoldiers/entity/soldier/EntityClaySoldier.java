@@ -30,7 +30,6 @@ import de.sanandrew.mods.claysoldiers.entity.ai.EntityAISearchTarget;
 import de.sanandrew.mods.claysoldiers.entity.ai.PathHelper;
 import de.sanandrew.mods.claysoldiers.item.ItemRegistry;
 import de.sanandrew.mods.claysoldiers.network.PacketManager;
-import de.sanandrew.mods.claysoldiers.network.datasync.DataSerializerUUID;
 import de.sanandrew.mods.claysoldiers.network.datasync.DataWatcherBooleans;
 import de.sanandrew.mods.claysoldiers.network.packet.PacketSyncEffects;
 import de.sanandrew.mods.claysoldiers.network.packet.PacketSyncUpgrades;
@@ -44,7 +43,6 @@ import de.sanandrew.mods.claysoldiers.util.CsmConfig;
 import de.sanandrew.mods.claysoldiers.util.EnumParticle;
 import de.sanandrew.mods.sanlib.lib.util.ItemStackUtils;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -89,7 +87,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentNavigableMap;
@@ -101,7 +98,7 @@ public class EntityClaySoldier
         extends EntityCreature
         implements ISoldier<EntityClaySoldier>, IEntityAdditionalSpawnData, ITargetingEntity<EntityClaySoldier>
 {
-    private static final DataParameter<UUID> TEAM_PARAM = EntityDataManager.createKey(EntityClaySoldier.class, DataSerializerUUID.INSTANCE);
+    private static final DataParameter<String> TEAM_PARAM = EntityDataManager.createKey(EntityClaySoldier.class, DataSerializers.STRING);
     private static final DataParameter<Byte> TEXTURE_TYPE_PARAM = EntityDataManager.createKey(EntityClaySoldier.class, DataSerializers.BYTE);
     private static final DataParameter<Byte> TEXTURE_ID_PARAM = EntityDataManager.createKey(EntityClaySoldier.class, DataSerializers.BYTE);
     private final DataWatcherBooleans<EntityClaySoldier> dwBooleans;
@@ -330,7 +327,7 @@ public class EntityClaySoldier
     }
 
     @Override
-    public boolean hasUpgrade(UUID id, EnumUpgradeType type) {
+    public boolean hasUpgrade(String id, EnumUpgradeType type) {
         return this.hasUpgrade(UpgradeRegistry.INSTANCE.getUpgrade(id), type);
     }
 
@@ -391,7 +388,7 @@ public class EntityClaySoldier
     }
 
     @Override
-    public ISoldierUpgradeInst getUpgradeInstance(UUID upgradeId, EnumUpgradeType type) {
+    public ISoldierUpgradeInst getUpgradeInstance(String upgradeId, EnumUpgradeType type) {
         return getUpgradeInstance(new UpgradeEntry(UpgradeRegistry.INSTANCE.getUpgrade(upgradeId), type));
     }
 
@@ -469,7 +466,7 @@ public class EntityClaySoldier
     }
 
     @Override
-    public boolean hasEffect(UUID effectId) {
+    public boolean hasEffect(String effectId) {
         return this.hasEffect(EffectRegistry.INSTANCE.getEffect(effectId));
     }
 
@@ -484,12 +481,12 @@ public class EntityClaySoldier
     }
 
     @Override
-    public int getEffectDurationLeft(UUID effectId) {
+    public int getEffectDurationLeft(String effectId) {
         return this.getEffectDurationLeft(EffectRegistry.INSTANCE.getEffect(effectId));
     }
 
     @Override
-    public ISoldierEffectInst getEffectInstance(UUID effectId) {
+    public ISoldierEffectInst getEffectInstance(String effectId) {
         return getEffectInstance(EffectRegistry.INSTANCE.getEffect(effectId));
     }
 
@@ -696,7 +693,7 @@ public class EntityClaySoldier
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
 
-        compound.setString(NBTConstants.E_SOLDIER_TEAM, this.dataManager.get(TEAM_PARAM).toString());
+        compound.setString(NBTConstants.E_SOLDIER_TEAM, this.dataManager.get(TEAM_PARAM));
         compound.setByte(NBTConstants.E_SOLDIER_TEXTYPE, this.dataManager.get(TEXTURE_TYPE_PARAM));
         compound.setByte(NBTConstants.E_SOLDIER_TEXID, this.dataManager.get(TEXTURE_ID_PARAM));
 
@@ -705,7 +702,7 @@ public class EntityClaySoldier
         NBTTagList upgrades = new NBTTagList();
         this.upgradeMap.forEach((upgEntry, upgInst) -> {
             NBTTagCompound upgNbt = new NBTTagCompound();
-            upgNbt.setString(NBTConstants.N_UPGRADE_ID, MiscUtils.defIfNull(UpgradeRegistry.INSTANCE.getId(upgEntry.upgrade), UuidUtils.EMPTY_UUID).toString());
+            upgNbt.setString(NBTConstants.N_UPGRADE_ID, MiscUtils.defIfNull(UpgradeRegistry.INSTANCE.getId(upgEntry.upgrade), ""));
             upgNbt.setByte(NBTConstants.N_UPGRADE_TYPE, (byte) upgEntry.type.ordinal());
             upgNbt.setTag(NBTConstants.N_UPGRADE_NBT, upgInst.getNbtData());
             ItemStackUtils.writeStackToTag(upgInst.getSavedStack(), upgNbt, NBTConstants.N_UPGRADE_ITEM);
@@ -717,7 +714,7 @@ public class EntityClaySoldier
         NBTTagList effects = new NBTTagList();
         this.effectMap.forEach((effect, effInst) -> {
             NBTTagCompound effNbt = new NBTTagCompound();
-            effNbt.setString(NBTConstants.N_EFFECT_ID, MiscUtils.defIfNull(EffectRegistry.INSTANCE.getId(effect), UuidUtils.EMPTY_UUID).toString());
+            effNbt.setString(NBTConstants.N_EFFECT_ID, MiscUtils.defIfNull(EffectRegistry.INSTANCE.getId(effect), ""));
             effNbt.setInteger(NBTConstants.N_EFFECT_DURATION, effInst.getDurationLeft());
             effNbt.setTag(NBTConstants.N_EFFECT_NBT, effInst.getNbtData());
             effect.onSave(this, effInst, effNbt);
@@ -733,7 +730,7 @@ public class EntityClaySoldier
         super.readEntityFromNBT(compound);
 
         String teamId = compound.getString(NBTConstants.E_SOLDIER_TEAM);
-        this.dataManager.set(TEAM_PARAM, UuidUtils.isStringUuid(teamId) ? UUID.fromString(teamId) : UuidUtils.EMPTY_UUID);
+        this.dataManager.set(TEAM_PARAM, teamId instanceof String ? teamId : "");
         this.dataManager.set(TEXTURE_TYPE_PARAM, compound.getByte(NBTConstants.E_SOLDIER_TEXTYPE));
         this.dataManager.set(TEXTURE_ID_PARAM, compound.getByte(NBTConstants.E_SOLDIER_TEXID));
 
@@ -746,9 +743,9 @@ public class EntityClaySoldier
             NBTTagCompound upgNbt = upgrades.getCompoundTagAt(i);
             String idStr = upgNbt.getString(NBTConstants.N_UPGRADE_ID);
             byte type = upgNbt.getByte(NBTConstants.N_UPGRADE_TYPE);
-            if( UuidUtils.isStringUuid(idStr) ) {
+            if( idStr instanceof String ) {
                 ItemStack upgStack = new ItemStack(upgNbt.getCompoundTag(NBTConstants.N_UPGRADE_ITEM));
-                ISoldierUpgrade upgrade = UpgradeRegistry.INSTANCE.getUpgrade(UUID.fromString(idStr));
+                ISoldierUpgrade upgrade = UpgradeRegistry.INSTANCE.getUpgrade(idStr);
                 if( upgrade != null ) {
                     ISoldierUpgradeInst upgInst = new SoldierUpgrade(upgrade, EnumUpgradeType.VALUES[type], upgStack);
                     upgInst.setNbtData(upgNbt.getCompoundTag(NBTConstants.N_UPGRADE_NBT));
@@ -762,8 +759,8 @@ public class EntityClaySoldier
         for( int i = 0, max = effects.tagCount(); i < max; i++ ) {
             NBTTagCompound effectNbt = effects.getCompoundTagAt(i);
             String idStr = effectNbt.getString(NBTConstants.N_EFFECT_ID);
-            if( UuidUtils.isStringUuid(idStr) ) {
-                ISoldierEffect effect = EffectRegistry.INSTANCE.getEffect(UUID.fromString(idStr));
+            if( idStr instanceof String ) {
+                ISoldierEffect effect = EffectRegistry.INSTANCE.getEffect(idStr);
                 if( effect != null ) {
                     ISoldierEffectInst effInst = new SoldierEffect(effect, effectNbt.getInteger(NBTConstants.N_EFFECT_DURATION));
                     effInst.setNbtData(effectNbt.getCompoundTag(NBTConstants.N_EFFECT_NBT));

@@ -14,12 +14,11 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 abstract class MeshDefUUID<T>
         implements MeshDef
 {
-    public final Map<UUID, ModelResourceLocation> modelRes = new HashMap<>();
+    public final Map<String, ModelResourceLocation> modelRes = new HashMap<>();
 
     @Override
     public ModelResourceLocation getModelLocation(ItemStack stack) {
@@ -29,7 +28,7 @@ abstract class MeshDefUUID<T>
     }
 
     public abstract T getType(ItemStack stack);
-    public abstract UUID getId(T type);
+    public abstract String getId(T type);
 
     public ResourceLocation[] getResLocations() {
         return this.modelRes.values().toArray(new ModelResourceLocation[0]);
@@ -49,6 +48,6 @@ abstract class MeshDefUUID<T>
         public ITeam getType(ItemStack stack) { return TeamRegistry.INSTANCE.getTeam(stack); }
 
         @Override
-        public UUID getId(ITeam type) { return type.getId(); }
+        public String getId(ITeam type) { return type.getId(); }
     }
 }

@@ -35,6 +35,21 @@ item.claysoldiers:doll_soldier.gray.name=Grauer Soldat
 item.claysoldiers:doll_soldier.gray.color=Grau
 item.claysoldiers:doll_soldier.white.name=Weißer Soldat
 item.claysoldiers:doll_soldier.white.color=Weiß
+
+item.claysoldiers:doll_soldier.oakwood.name=Eichenholz Soldat
+item.claysoldiers:doll_soldier.oakwood.color=Eichenholz
+item.claysoldiers:doll_soldier.birchwood.name=Birkenholz Soldat
+item.claysoldiers:doll_soldier.birchwood.color=Birkenholz
+item.claysoldiers:doll_soldier.sprucewood.name=Fichtenholz Soldat
+item.claysoldiers:doll_soldier.sprucewood.color=Fichtenholz
+item.claysoldiers:doll_soldier.junglewood.name=Tropenholz Soldat
+item.claysoldiers:doll_soldier.junglewood.color=Tropenholz
+item.claysoldiers:doll_soldier.acaciawood.name=Akazienholz Soldat
+item.claysoldiers:doll_soldier.acaciawood.color=Akazienholz
+item.claysoldiers:doll_soldier.darkoakwood.name=Schwarzeichenholz Soldat
+item.claysoldiers:doll_soldier.darkoakwood.color=Schwarzeichenholz
+
+
 item.claysoldiers:doll_soldier.melon.name=Melonensoldat
 item.claysoldiers:doll_soldier.melon.color=Melone
 item.claysoldiers:doll_soldier.pumpkin.name=Kürbissoldat

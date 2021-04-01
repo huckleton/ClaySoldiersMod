@@ -35,6 +35,21 @@ item.claysoldiers:doll_soldier.gray.name=회색 병사
 item.claysoldiers:doll_soldier.gray.color=회색
 item.claysoldiers:doll_soldier.white.name=하얀색 병사
 item.claysoldiers:doll_soldier.white.color=하얀색
+
+item.claysoldiers:doll_soldier.oakwood.name=참나무 병사
+item.claysoldiers:doll_soldier.oakwood.color=참나무 판자
+item.claysoldiers:doll_soldier.birchwood.name=자작나무 병사
+item.claysoldiers:doll_soldier.birchwood.color=자작나무 판자
+item.claysoldiers:doll_soldier.sprucewood.name=가문비나무 병사
+item.claysoldiers:doll_soldier.sprucewood.color=가문비나무 판자
+item.claysoldiers:doll_soldier.junglewood.name=정글 나무 병사
+item.claysoldiers:doll_soldier.junglewood.color=정글 나무 판자
+item.claysoldiers:doll_soldier.acaciawood.name=아카시아나무 병사
+item.claysoldiers:doll_soldier.acaciawood.color=아카시아나무 판자
+item.claysoldiers:doll_soldier.darkoakwood.name=짙은 참나무 병사
+item.claysoldiers:doll_soldier.darkoakwood.color=짙은 참나무 판자
+
+
 item.claysoldiers:doll_soldier.melon.name=수박 병사
 item.claysoldiers:doll_soldier.melon.color=수박
 item.claysoldiers:doll_soldier.pumpkin.name=호박 병사

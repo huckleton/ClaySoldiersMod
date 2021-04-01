@@ -16,7 +16,6 @@ import de.sanandrew.mods.claysoldiers.api.entity.soldier.upgrade.ISoldierUpgrade
 import de.sanandrew.mods.claysoldiers.registry.upgrade.UpgradeRegistry;
 import de.sanandrew.mods.claysoldiers.registry.upgrade.Upgrades;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -85,7 +84,7 @@ public class UpgradeIronBlock
 
     @Override
     public void onUpgradeDestroyed(ISoldier soldier, ISoldierUpgradeInst upgradeInst, ISoldierUpgradeInst destroyedUpgInst) {
-        if( !soldier.getEntity().world.isRemote && UuidUtils.areUuidsEqual(UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()), Upgrades.OH_BOWL) ) {
+        if( !soldier.getEntity().world.isRemote && UpgradeRegistry.INSTANCE.getId(destroyedUpgInst.getUpgrade()) == Upgrades.OH_BOWL ) {
             soldier.destroyUpgrade(upgradeInst.getUpgrade(), upgradeInst.getUpgradeType(), true);
         }
     }

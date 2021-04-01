@@ -13,7 +13,6 @@ import de.sanandrew.mods.claysoldiers.api.entity.soldier.ITeamRegistry;
 import de.sanandrew.mods.claysoldiers.item.ItemRegistry;
 import de.sanandrew.mods.sanlib.lib.util.ItemStackUtils;
 import de.sanandrew.mods.sanlib.lib.util.MiscUtils;
-import de.sanandrew.mods.sanlib.lib.util.UuidUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -24,14 +23,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public final class TeamRegistry
         implements ITeamRegistry
 {
     public static final TeamRegistry INSTANCE = new TeamRegistry();
 
-    private final Map<UUID, ITeam> teamFromUUID;
+    private final Map<String, ITeam> teamFromUUID;
     private final ArrayList<ITeam> teams;
 
     private TeamRegistry() {
@@ -40,7 +38,7 @@ public final class TeamRegistry
     }
 
     @Override
-    public ITeam registerTeam(UUID id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqueTextures) {
+    public ITeam registerTeam(String id, String name, ResourceLocation itemModel, int itemColor, ResourceLocation[] normalTextures, ResourceLocation[] rareTextures, ResourceLocation[] uniqueTextures) {
         if( id == null || name == null || itemModel == null || normalTextures == null || normalTextures.length < 1 ) {
             CsmConstants.LOG.log(Level.WARN, String.format("Team ID, name, item model and normal texture cannot be null nor empty for ID %s with name %s!", id, name));
             return null;
@@ -70,7 +68,7 @@ public final class TeamRegistry
             return false;
         }
 
-        UUID id = team.getId();
+        String id = team.getId();
         String name = team.getName();
 
         if( id == null || name == null || team.getItemModel() == null || team.getNormalTextureIds() == null || team.getNormalTextureIds().length < 1 ) {
@@ -95,7 +93,7 @@ public final class TeamRegistry
     }
 
     @Override
-    public ITeam getTeam(UUID id) {
+    public ITeam getTeam(String id) {
         return MiscUtils.defIfNull(this.teamFromUUID.get(id), NULL_TEAM);
     }
 
@@ -111,7 +109,7 @@ public final class TeamRegistry
             NBTTagCompound nbt = stack.getSubCompound("dollSoldier");
             if( nbt != null && nbt.hasKey("team", Constants.NBT.TAG_STRING) ) {
                 try {
-                    return this.getTeam(UUID.fromString(nbt.getString("team")));
+                    return this.getTeam(nbt.getString("team"));
                 } catch( IllegalArgumentException ex ) {
                     return NULL_TEAM;
                 }
@@ -136,13 +134,13 @@ public final class TeamRegistry
     }
 
     @Override
-    public ItemStack getNewTeamStack(int count, UUID team) {
+    public ItemStack getNewTeamStack(int count, String team) {
         return setTeam(new ItemStack(ItemRegistry.DOLL_SOLDIER, count), team);
     }
 
     public static final ITeam NULL_TEAM = new ITeam()
     {
-        @Override public UUID getId() { return UuidUtils.EMPTY_UUID; }
+        @Override public String getId() { return ""; }
         @Override public String getName() { return "null"; }
         @Override public ResourceLocation getItemModel() { return null; }
         @Override public int getItemColor() { return 0x000000; }
