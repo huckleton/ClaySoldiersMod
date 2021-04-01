@@ -12,7 +12,6 @@ import de.sanandrew.mods.claysoldiers.registry.team.TeamRegistry;
 import de.sanandrew.mods.claysoldiers.registry.team.Teams;
 import de.sanandrew.mods.sanlib.lib.util.ItemStackUtils;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -42,12 +41,12 @@ public class WoodSoldierRecipe
             Teams.SOLDIER_WOODDARKOAK
     };
     public static final ItemStack[] ITEMS = {
-            new ItemStack(Blocks.PLANKS, 0),
-            new ItemStack(Blocks.PLANKS, 1),
-            new ItemStack(Blocks.PLANKS, 2),
-            new ItemStack(Blocks.PLANKS, 3),
-            new ItemStack(Blocks.PLANKS, 4),
-            new ItemStack(Blocks.PLANKS, 5)
+            new ItemStack(Blocks.PLANKS, 1, 0),
+            new ItemStack(Blocks.PLANKS, 1, 1),
+            new ItemStack(Blocks.PLANKS, 1, 2),
+            new ItemStack(Blocks.PLANKS, 1, 3),
+            new ItemStack(Blocks.PLANKS, 1, 4),
+            new ItemStack(Blocks.PLANKS, 1, 5)
     };
 
     @Override
